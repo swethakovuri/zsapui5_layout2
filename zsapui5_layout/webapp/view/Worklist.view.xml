@@ -1,0 +1,83 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar"
+	controllerName="zsapui5_layout.zsapui5_layout.controller.Worklist">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}"/>
+		</semantic:titleHeading>
+		<semantic:content>
+			<Panel>
+				<content>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Sort by Price" press="_sortbycategory"/>
+						<Button text="Sort by Category" press="_sortbyprice"/>
+						<Button icon="sap-icon://refresh" press="_refresh"/>
+					</Toolbar>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Price LE 100" press="_priceLE100"></Button>
+					</Toolbar>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Width BT 5 10" press="_WidthBT5_10"></Button>
+					</Toolbar>
+						<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Price and Category" press="_PriceandCat"></Button>
+					</Toolbar>
+					<Toolbar>
+					<ToolbarSpacer/>
+					<Input width="auto" placeholder="Search on category" submit="_searchCategory"></Input>
+					</Toolbar>
+					<Table id="table1" items="{path : 'sapprod>/'}" growing="true" growingThreshold="8" growingScrollToLoad="false">
+						<columns>
+							<Column>
+								<Text text="ProductID"/>
+							</Column>
+							<Column>
+								<Text text="TypeCode"/>
+							</Column>
+							<Column>
+								<Text text="Category"/>
+							</Column>
+							<Column>
+								<Text text="Name"/>
+							</Column>
+							<Column>
+								<Text text="Price"/>
+							</Column>
+							<Column>
+								<Text text="Width"/>
+							</Column>
+							<Column demandPopin="true" minScreenWidth="Tablet">
+								<Text text="CreatedAt"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{sapprod>ProductID}"/>
+									<Text text="{sapprod>TypeCode}"/>
+									<Text text="{sapprod>Category}"/>
+									<Text text="{sapprod>Name}"/>
+									<Text text="{sapprod>Price}"/>
+									<Text text="{sapprod>Width}"/>
+									<Text text="{sapprod>CreatedAt}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Panel>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{worklistView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+	</semantic:SemanticPage>
+</mvc:View>
